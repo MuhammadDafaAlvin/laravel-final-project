@@ -13,57 +13,51 @@ class TblPostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         TblPost::create($request->all());
         return redirect()->route('posts.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(TblPost $tblPost)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $post = TblPost::findOrFail($id);
         return view('posts.edit', compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'status' => 'required|boolean',
+        ]);
+
         $post = TblPost::findOrFail($id);
-        $post->update($request->all());
-        return redirect()->route('posts.index');
+        $post->update([
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $post = TblPost::findOrFail($id);
         $post->delete();
-        return redirect()->route('posts.index');
+
+        return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus.');
     }
 }

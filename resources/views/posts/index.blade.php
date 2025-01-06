@@ -25,8 +25,12 @@
                 <td>{{ $post->slug }}</td>
                 <td>{{ $post->status }}</td>
                 <td>
-                    <a href="#" class="btn btn-warning">Edit</a>
-                    <button class="btn btn-danger">Hapus</button>
+                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus post ini?')">Hapus</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
