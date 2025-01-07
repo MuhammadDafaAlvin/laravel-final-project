@@ -16,6 +16,10 @@
             <input type="text" name="slug" id="slug" class="form-control" value="{{ $post->slug }}" required>
         </div>
         <div class="mb-3">
+            <label for="content" class="form-label">Konten</label>
+            <input type="text" name="content" id="content" class="form-control" value="{{ $post->content }}" required>
+        </div>
+        <div class="mb-3">
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select">
                 <option value="1" {{ $post->status == 1 ? 'selected' : '' }}>Aktif</option>

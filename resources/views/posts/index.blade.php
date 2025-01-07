@@ -10,19 +10,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Judul</th>
                 <th>Slug</th>
+                <th>Konten</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
+            <a href="{{ route('posts.create') }}" class="btn btn-primary">Tambah</a>
             @foreach($posts as $post)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->slug }}</td>
+                <td>{{ $post->content }}</td>
                 <td>{{ $post->status }}</td>
                 <td>
                     <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>

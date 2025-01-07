@@ -9,7 +9,7 @@ class TblPost extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbl_posts'; // Nama tabel di database
+    protected $table = 'tbl_posts'; 
     protected $fillable = [
         'title',
         'slug',
