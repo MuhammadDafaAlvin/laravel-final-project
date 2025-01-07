@@ -1,12 +1,10 @@
 @extends('layouts.app')
-
 @section('title', 'Tambah Post')
-
 @section('content')
-<div class="container mt-5">
+
+<div class="container pt-4">
     <h1 class="text-center mb-4">Tambah Post</h1>
 
-    <!-- Menampilkan error validasi jika ada -->
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -17,9 +15,13 @@
     </div>
     @endif
 
-    <!-- Form tambah post -->
     <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
+        <div class="mb-3">
+            <label for="user_id" class="form-label">ID User</label>
+            <input type="number" name="user_id" id="user_id" class="form-control" value="{{ old('user_id') }}" required>
+        </div>
 
         <div class="mb-3">
             <label for="title" class="form-label">Judul</label>
@@ -57,14 +59,10 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="user_id" class="form-label">User ID</label>
-            <input type="number" name="user_id" id="user_id" class="form-control" value="{{ old('user_id') }}" required>
+        <div class="d-flex my-4 gap-3">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ route('posts.index') }}" class="btn btn-secondary">Batal</a>
         </div>
-
-        <!-- Tombol Simpan -->
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('posts.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

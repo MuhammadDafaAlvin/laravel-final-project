@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TblPost;
 use Illuminate\Http\Request;
-use App\Models\Post;
 
 class TblPostController extends Controller
 {
@@ -32,7 +31,6 @@ class TblPostController extends Controller
             'user_id' => 'required|integer',
         ]);
 
-        // Upload gambar jika ada
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('posts_images', 'public');
