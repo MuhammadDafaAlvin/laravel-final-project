@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TblPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TblPostController extends Controller
 {
@@ -49,11 +50,6 @@ class TblPostController extends Controller
         return redirect()->route('posts.index')->with('success', 'Post berhasil ditambahkan.');
     }
 
-    public function show(TblPost $tblPost)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $post = TblPost::findOrFail($id);
@@ -64,15 +60,29 @@ class TblPostController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'status' => 'required|boolean',
+            'slug' => 'required|string|max:255|unique:tbl_posts,slug,' . $id,
+            'content' => 'required|string',
+            'status' => 'required|in:publish,draft',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $post = TblPost::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            if ($post->image && Storage::exists('public/' . $post->image)) {
+                Storage::delete('public/' . $post->image);
+            }
+            $imagePath = $request->file('image')->store('posts_images', 'public');
+        } else {
+            $imagePath = $post->image;
+        }
+
         $post->update([
             'title' => $request->title,
             'slug' => $request->slug,
+            'content' => $request->content,
             'status' => $request->status,
+            'image' => $imagePath,
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui.');
