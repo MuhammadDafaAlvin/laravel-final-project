@@ -12,24 +12,15 @@
 </head>
 
 <body style="font-family: 'Inter', sans-serif;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Laravel CRUD</a>
-        </div>
-    </nav>
 
-    <div class="py-4">
+    <div>
         @if(session('success'))
-        <div class="alert alert-success text-center">
+        <div class="alert alert-success text-center alert-dismissible fade show">
             {{ session('success') }}
         </div>
         @endif
         @yield('content')
     </div>
-
-    <footer class="text-center mt-4">
-        <p>&copy; Muhammad Dafa Alvin Zuhdi | 23091397083 | 2023C </p>
-    </footer>
 </body>
 
 </html>
