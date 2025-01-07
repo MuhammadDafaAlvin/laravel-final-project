@@ -14,7 +14,7 @@
             <tr>
                 <th>No</th>
                 <th>Judul</th>
-                <th>Slug</th>
+                <th style="width: 20%;">Slug</th>
                 <th>Konten</th>
                 <th>Gambar</th>
                 <th>Status</th>
