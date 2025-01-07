@@ -10,7 +10,7 @@
     @else
 
     <table class="table p-3 align-middle text-center table-bordered">
-        <thead class="text-center ">
+        <thead class="text-center">
             <tr>
                 <th>No</th>
                 <th>Judul</th>
@@ -18,26 +18,32 @@
                 <th>Konten</th>
                 <th>Gambar</th>
                 <th>Status</th>
-                <th style="width: 15%;">Aksi</th>
+                <th style="width: 20%;">Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach($posts as $post)
-            <tr">
+            <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->slug }}</td>
-                <td>{{ $post->content }}</td>
+                <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    {{ $post->content }}
+                    @if(strlen($post->content) > 100)
+                    <i class="fas fa-ellipsis-h" style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" title="Konten lebih panjang..."></i>
+                    @endif
+                </td>
                 <td>
                     <img src="{{ asset('storage/' . $post->image) }}" alt="Gambar {{ $post->title }}" style="width: 100px; height: auto;">
                 </td>
                 <td>{{ $post->status }}</td>
                 <td>
-                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info btn-sm">Detail</a>
+                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete(event)">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                     </form>
 
                     <script>
@@ -58,10 +64,18 @@
                         }
                     </script>
                 </td>
-                </tr>
-                @endforeach
+            </tr>
+            @endforeach
         </tbody>
     </table>
+
+    <script>
+        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        let tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
     @endif
 </div>
 @endsection

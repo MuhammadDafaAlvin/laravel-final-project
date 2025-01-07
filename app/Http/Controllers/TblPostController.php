@@ -88,6 +88,12 @@ class TblPostController extends Controller
         return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui.');
     }
 
+    public function show($id)
+    {
+        $post = TblPost::findOrFail($id);
+        return view('posts.show', compact('post'));
+    }
+
     public function destroy($id)
     {
         $post = TblPost::findOrFail($id);
