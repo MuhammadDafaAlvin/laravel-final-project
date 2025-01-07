@@ -44,7 +44,7 @@
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-select" required>
-                <option value="published" {{ old('status') === 'published' ? 'selected' : '' }}>Published</option>
+                <option value="publish" {{ old('status') === 'publish' ? 'selected' : '' }}>Published</option>
                 <option value="draft" {{ old('status') === 'draft' ? 'selected' : '' }}>Draft</option>
             </select>
         </div>

@@ -25,7 +25,7 @@ class TblPostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|unique:tbl_posts,slug',
-            'status' => 'required|in:published,draft',
+            'status' => 'required|in:publish,draft',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'aktif' => 'required|boolean',

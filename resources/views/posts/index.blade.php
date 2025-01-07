@@ -3,11 +3,10 @@
 @section('content')
 <div class="container">
     <h1 class="text-center">Daftar Post</h1>
-
     @if($posts->isEmpty())
     <p class="text-center">Belum ada data post.</p>
     @else
-    <table class="table">
+    <table class="table p-3">
         <thead>
             <tr>
                 <th>No</th>
@@ -15,7 +14,7 @@
                 <th>Slug</th>
                 <th>Konten</th>
                 <th>Status</th>
-                <th>Aksi</th>
+                <th style="width: 15%;">Aksi</th>
             </tr>
         </thead>
         <tbody>
