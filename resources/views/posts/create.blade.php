@@ -34,6 +34,17 @@
             <textarea name="content" id="content" class="form-control" required>{{ old('content') }}</textarea>
         </div>
         <div class="mb-3">
+            <label for="hits" class="form-label">Hits</label>
+            <input type="number" name="hits" id="hits" class="form-control" value="{{ old('hits', 0) }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="aktif" class="form-label">Aktif</label>
+            <select name="aktif" id="aktif" class="form-select" required>
+                <option value="Y" {{ old('aktif', 'Y') === 'Y' ? 'selected' : '' }}>Aktif</option>
+                <option value="N" {{ old('aktif', 'Y') === 'N' ? 'selected' : '' }}>Nonaktif</option>
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="image" class="form-label">Gambar</label>
             <input type="file" name="image" id="image" class="form-control" accept="image/*">
         </div>
@@ -42,13 +53,6 @@
             <select name="status" id="status" class="form-select" required>
                 <option value="publish" {{ old('status') === 'publish' ? 'selected' : '' }}>Published</option>
                 <option value="draft" {{ old('status') === 'draft' ? 'selected' : '' }}>Draft</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="aktif" class="form-label">Aktif</label>
-            <select name="aktif" id="aktif" class="form-select" required>
-                <option value="1" {{ old('aktif') === '1' ? 'selected' : '' }}>Aktif</option>
-                <option value="0" {{ old('aktif') === '0' ? 'selected' : '' }}>Tidak Aktif</option>
             </select>
         </div>
         <div class="d-flex my-4 gap-3">

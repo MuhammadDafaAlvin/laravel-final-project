@@ -15,8 +15,9 @@
                 <th>No</th>
                 <th>Judul</th>
                 <th style="width: 20%;">Slug</th>
-                <th>Konten</th>
                 <th>Gambar</th>
+                <th>Konten</th>
+                <th>Aktif</th>
                 <th>Status</th>
                 <th style="width: 20%;">Aksi</th>
             </tr>
@@ -26,7 +27,14 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->slug }}</td>
+                <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    <a href="{{ url($post->slug) }}" class="text-primary" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $post->slug }}">
+                        {{ $post->slug }}
+                    </a>
+                </td>
+                <td>
+                    <img src="{{ asset('storage/' . $post->image) }}" alt="Gambar {{ $post->title }}" style="width: 100px; height: auto;">
+                </td>
                 <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                     {{ $post->content }}
                     @if(strlen($post->content) > 100)
@@ -34,9 +42,12 @@
                     @endif
                 </td>
                 <td>
-                    <img src="{{ asset('storage/' . $post->image) }}" alt="Gambar {{ $post->title }}" style="width: 100px; height: auto;">
+                    <span class="badge {{ $post->aktif === 'Y' ? 'bg-success px-4 py-2' : 'bg-warning text-dark px-3 py-2' }}">
+                        {{ $post->aktif === 'Y' ? 'Aktif' : 'Nonaktif' }}
+                    </span>
                 </td>
                 <td>{{ $post->status }}</td>
+
                 <td>
                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info btn-sm">Detail</a>
                     <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm">Edit</a>

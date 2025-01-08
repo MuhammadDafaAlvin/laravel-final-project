@@ -21,6 +21,17 @@
             <textarea name="content" id="content" class="form-control" required>{{ old('content', $post->content) }}</textarea>
         </div>
         <div class="mb-3">
+            <label for="hits" class="form-label">Hits</label>
+            <input type="number" name="hits" id="hits" class="form-control" value="{{ old('hits', $post->hits) }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="aktif" class="form-label">Aktif</label>
+            <select name="aktif" id="aktif" class="form-select" required>
+                <option value="Y" {{ old('aktif', $post->aktif) === 'Y' ? 'selected' : '' }}>Ya</option>
+                <option value="N" {{ old('aktif', $post->aktif) === 'N' ? 'selected' : '' }}>Tidak</option>
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="image" class="form-label">Gambar Lama</label><br>
             <img src="{{ asset('storage/' . $post->image) }}" alt="Gambar" style="width: 100px; height: auto;"><br>
         </div>

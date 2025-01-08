@@ -27,8 +27,9 @@ class TblPostController extends Controller
             'slug' => 'required|string|unique:tbl_posts,slug',
             'status' => 'required|in:publish,draft',
             'content' => 'required|string',
+            'hits' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'aktif' => 'required|boolean',
+            'aktif' => 'required|in:Y,N',
             'user_id' => 'required|integer',
         ]);
 
@@ -42,6 +43,7 @@ class TblPostController extends Controller
             'slug' => $request->slug,
             'status' => $request->status,
             'content' => $request->content,
+            'hits' => $request->hits,
             'image' => $imagePath ?? 'Noimage.jpg',
             'aktif' => $request->aktif,
             'user_id' => $request->user_id,
@@ -62,6 +64,8 @@ class TblPostController extends Controller
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:tbl_posts,slug,' . $id,
             'content' => 'required|string',
+            'hits' => 'required|integer|min:0',
+            'aktif' => 'required|in:Y,N',
             'status' => 'required|in:publish,draft',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -81,6 +85,8 @@ class TblPostController extends Controller
             'title' => $request->title,
             'slug' => $request->slug,
             'content' => $request->content,
+            'aktif' => $request->aktif,
+            'hits' => $request->hits,
             'status' => $request->status,
             'image' => $imagePath,
         ]);

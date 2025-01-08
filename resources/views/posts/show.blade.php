@@ -22,6 +22,7 @@
                     {{ ucfirst($post->status) }}
                 </span>
             </p>
+            <p class="card-text"><strong>Hits:</strong> {{ number_format($post->hits, 0, ',', '.') }}</p>
             <p><strong>Content:</strong></p>
             <p>{{ $post->content }}</p>
             <div class="text-center">
